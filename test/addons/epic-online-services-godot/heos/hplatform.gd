@@ -162,6 +162,7 @@ func set_eos_log_level(log_category: EOS.Logging.LogCategory, log_level: EOS.Log
 ## Create the EOS Platform
 func create_platform_async(opts: EOS.Platform.CreateOptions) -> bool:
 	_log.debug("Creating EOS Platform")
+	_log.debug("EOS cache directory: %s" % opts.cache_directory)
 	var res := EOS.Platform.PlatformInterface.create(opts)
 	
 	var retry_count = CREATE_RETRY_COUNT
