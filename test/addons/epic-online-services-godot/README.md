@@ -76,8 +76,8 @@ func _ready() -> void:
 	
 	var setup_success := await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
-		printerr("Failed to setup EOS. See logs for more details")
-		return
+	    printerr("Failed to setup EOS. See logs for more details")
+	    return
 
 	# Setup Logs from EOS
 	HPlatform.log_msg.connect(_on_eos_log_msg)
@@ -169,10 +169,10 @@ Join the Discord server for discussing suggestions or bugs: [3ddelano Cafe](http
 
 - Cross platform lobbies
 
-	- iOS
-	  <img src="./_media/ios_simulator_in_lobby.png">
-	- macOS
-	  <img src="./_media/mac_in_lobby.png">
+    - iOS
+      <img src="./_media/ios_simulator_in_lobby.png">
+    - macOS
+      <img src="./_media/mac_in_lobby.png">
 
 ## How does it work
 
@@ -322,119 +322,119 @@ and:
    `dependencies` section.
 
    Before
-	```gradle
-	dependencies {
-		implementation libraries.kotlinStdLib
-		implementation libraries.androidxFragment
-		... other code
-	```
+    ```gradle
+    dependencies {
+        implementation libraries.kotlinStdLib
+        implementation libraries.androidxFragment
+        ... other code
+    ```
 
    After
-	```gradle
-	dependencies {
-		implementation libraries.kotlinStdLib
-		implementation libraries.androidxFragment
-		
-		// EOS SDK dependencies
-		implementation 'androidx.appcompat:appcompat:1.5.1'
-		implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-		implementation 'androidx.security:security-crypto:1.0.0'
-		implementation 'androidx.browser:browser:1.4.0'
-		implementation 'androidx.webkit:webkit:1.7.0'
-		// Update the path so that it points to eossdk-StaticSTDC-release.aar provided in addons/epic-online-services-godot/bin/android/
-		implementation files('../../addons/epic-online-services-godot/bin/android/eossdk-StaticSTDC-release.aar')
+    ```gradle
+    dependencies {
+        implementation libraries.kotlinStdLib
+        implementation libraries.androidxFragment
+        
+        // EOS SDK dependencies
+        implementation 'androidx.appcompat:appcompat:1.5.1'
+        implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+        implementation 'androidx.security:security-crypto:1.0.0'
+        implementation 'androidx.browser:browser:1.4.0'
+        implementation 'androidx.webkit:webkit:1.7.0'
+        // Update the path so that it points to eossdk-StaticSTDC-release.aar provided in addons/epic-online-services-godot/bin/android/
+        implementation files('../../addons/epic-online-services-godot/bin/android/eossdk-StaticSTDC-release.aar')
 
-		...other code
-	```
+        ...other code
+    ```
 
 4. In the `res://android/build/build.gradle` file, add the following lines after the `defaultConfig` in the `android`
    section.
 
    Before
-	```gradle
-	android {
+    ```gradle
+    android {
 
-		... other code
+        ... other code
 
-		defaultConfig {
-			... other code
-		
-			// Feel free to modify the application id to your own.
-			applicationId getExportPackageName()
-			versionCode getExportVersionCode()
-			versionName getExportVersionName()
-			minSdkVersion getExportMinSdkVersion()
-			targetSdkVersion getExportTargetSdkVersion()
+        defaultConfig {
+            ... other code
+        
+            // Feel free to modify the application id to your own.
+            applicationId getExportPackageName()
+            versionCode getExportVersionCode()
+            versionName getExportVersionName()
+            minSdkVersion getExportMinSdkVersion()
+            targetSdkVersion getExportTargetSdkVersion()
 
-			missingDimensionStrategy 'products', 'template'
-		}
+            missingDimensionStrategy 'products', 'template'
+        }
 
-		... other code
-	```
+        ... other code
+    ```
 
    After
-	```gradle
-	android {
+    ```gradle
+    android {
 
-		... other code
+        ... other code
 
-		defaultConfig {
-			... other code
-		
-			// Feel free to modify the application id to your own.
-			applicationId getExportPackageName()
-			versionCode getExportVersionCode()
-			versionName getExportVersionName()
-			minSdkVersion getExportMinSdkVersion()
-			targetSdkVersion getExportTargetSdkVersion()
+        defaultConfig {
+            ... other code
+        
+            // Feel free to modify the application id to your own.
+            applicationId getExportPackageName()
+            versionCode getExportVersionCode()
+            versionName getExportVersionName()
+            minSdkVersion getExportMinSdkVersion()
+            targetSdkVersion getExportTargetSdkVersion()
 
-			missingDimensionStrategy 'products', 'template'
+            missingDimensionStrategy 'products', 'template'
 
-			// This is needed by EOS Android SDK
-			String ClientId = "PUT YOUR EOS CLIENT ID HERE"
-			resValue("string", "eos_login_protocol_scheme", "eos." + ClientId.toLowerCase())
-		}
+            // This is needed by EOS Android SDK
+            String ClientId = "PUT YOUR EOS CLIENT ID HERE"
+            resValue("string", "eos_login_protocol_scheme", "eos." + ClientId.toLowerCase())
+        }
 
-		... other code
-	```
+        ... other code
+    ```
 
 5. In the `res://android/build/config.gradle` file, update the `minSdk` to `23` to match with the requirements of the
    `EOS Android SDK`.
 
    Before
-	```gradle
-	minSdk             : 21,
-	```
+    ```gradle
+    minSdk             : 21,
+    ```
    After
-	```gradle
-	minSdk             : 23,
-	```
+    ```gradle
+    minSdk             : 23,
+    ```
 
 6. In the `res://android/build/src/com/godot/game/GodotGame.java` file, update it as follows.
-	```java
-	package com.godot.game;
+    ```java
+    package com.godot.game;
 
-	import com.epicgames.mobile.eossdk.EOSSDK;     // added
-	import org.godotengine.godot.GodotActivity;
+    import com.epicgames.mobile.eossdk.EOSSDK;     // added
+    import org.godotengine.godot.GodotActivity;
 
-	import android.os.Bundle;
+    import android.os.Bundle;
 
-	public class GodotApp extends GodotActivity {
-		static {                                   // added
-			System.loadLibrary("EOSSDK");          // added
-		}                                          // added
-		
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			EOSSDK.init(getActivity());  // added
-			
-			setTheme(R.style.GodotAppMainTheme);
-			super.onCreate(savedInstanceState);
+    public class GodotApp extends GodotActivity {
+        static {                                   // added
+            System.loadLibrary("EOSSDK");          // added
+        }                                          // added
+        
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            EOSSDK.init(getActivity());  // added
+            
+            setTheme(R.style.GodotAppMainTheme);
+            super.onCreate(savedInstanceState);
 
-		}
-	}
+        }
+    }
 
-	```
+    ```
 
 7. Now open your project in the Godot Editor, and goto `Project -> Export` and create a new Android export profile.
 
@@ -453,34 +453,34 @@ device and iOS arm64 simulator.
 ## Current Project Status
 
 - Completed with sample
-	- Auth Interface
-	- Achievements Interface
-	- Connect Interface
-	- CustomInvites Interface
-	- Friends Interface
-	- Stats Interface
-	- UserInfo Interface
-	- Leaderboards Interface
-	- Metrics Interface
-	- Mods Interface
-	- Presence Interface
-	- ProgressionSnapshot Interface
-	- Reports Interface
-	- UI Interface
-	- Lobby Interface (Also sample for manual audio input/output)
-	- RTC Interface
-	- P2P Interface
-	- Version Interface
+    - Auth Interface
+    - Achievements Interface
+    - Connect Interface
+    - CustomInvites Interface
+    - Friends Interface
+    - Stats Interface
+    - UserInfo Interface
+    - Leaderboards Interface
+    - Metrics Interface
+    - Mods Interface
+    - Presence Interface
+    - ProgressionSnapshot Interface
+    - Reports Interface
+    - UI Interface
+    - Lobby Interface (Also sample for manual audio input/output)
+    - RTC Interface
+    - P2P Interface
+    - Version Interface
 
 - Completed without sample
-	- KWS Interface
-	- PlayerDataStorage Interface
-	- Sanctions Interface
-	- Sessions Interface
-	- TitleStorage Interface
-	- Ecom Interface
-	- AntiCheatServer Interface
-	- AntiCheatClient Interface
+    - KWS Interface
+    - PlayerDataStorage Interface
+    - Sanctions Interface
+    - Sessions Interface
+    - TitleStorage Interface
+    - Ecom Interface
+    - AntiCheatServer Interface
+    - AntiCheatClient Interface
 
 - Not completed
-	- Integrated Platform Interface
+    - Integrated Platform Interface

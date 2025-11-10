@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Networking"
-run/main_scene="res://Scenes/EOSAuthDemo.tscn"
+config/name="lobby"
+run/main_scene="res://Scenes/MainMenu/main.tscn"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,10 +26,11 @@ HStats="*res://addons/epic-online-services-godot/heos/hstats.gd"
 HLeaderboards="*res://addons/epic-online-services-godot/heos/hleaderboards.gd"
 HLobbies="*res://addons/epic-online-services-godot/heos/hlobbies.gd"
 HP2P="*res://addons/epic-online-services-godot/heos/hp2p.gd"
+EOSManager="*res://Scripts/EOSManager.cs"
 
 [dotnet]
 
-project/assembly_name="Networking"
+project/assembly_name="lobby"
 
 [editor_plugins]
 

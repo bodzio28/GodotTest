@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqr5yj8x3kp2m"]
+
+[ext_resource type="Texture2D" uid="uid://cdovhk1megx81" path="res://icon.svg" id="1_a4kyt"]
+[ext_resource type="Script" path="res://Scripts/UI/UiManager.cs" id="2_qmux8"]
+[ext_resource type="Script" path="res://Scenes/LobbyCreate/LobbyCreateMenu.gd" id="3_create"]
+
+[node name="LobbyCreate" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_create")
+
+[node name="CreateLobby" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 19.0
+offset_right = -933.0
+offset_bottom = -453.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "create lobby"
+icon = ExtResource("1_a4kyt")
+icon_alignment = 1
+expand_icon = true
+
+[node name="UIManager" type="Node" parent="."]
+script = ExtResource("2_qmux8")
+
+[node name="NicknamePanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="NicknameLabel" type="Label" parent="NicknamePanel"]
+layout_mode = 2
+text = "Twój nick:"
+
+[node name="NicknameEdit" type="LineEdit" parent="NicknamePanel"]
+layout_mode = 2
+placeholder_text = "Wpisz nick (opcjonalnie)"
+max_length = 20
+
+[node name="SetNicknameButton" type="Button" parent="NicknamePanel"]
+layout_mode = 2
+text = "Ustaw nick"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -50.0
+offset_right = 110.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "← Menu"
+
+[connection signal="pressed" from="CreateLobby" to="UIManager" method="OnCreateLobbyButtonPressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

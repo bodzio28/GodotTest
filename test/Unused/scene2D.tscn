@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://1xcx58a5k85a"]
+
+[ext_resource type="Texture2D" uid="uid://cdovhk1megx81" path="res://icon.svg" id="1_a4kyt"]
+[ext_resource type="Script" path="res://Scripts/UI/UiManager.cs" id="2_qmux8"]
+[ext_resource type="Script" path="res://Scripts/UI/LobbyListUI.cs" id="3_llh4u"]
+[ext_resource type="Script" path="res://Scripts/EOStestPlatform.gd" id="4_0hgl0"]
+
+[node name="Node" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreateLobby" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 19.0
+offset_right = -933.0
+offset_bottom = -453.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "create lobby"
+icon = ExtResource("1_a4kyt")
+icon_alignment = 1
+expand_icon = true
+
+[node name="JoinLobby" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 286.0
+offset_top = 26.0
+offset_right = -694.0
+offset_bottom = -458.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "JOIN"
+icon = ExtResource("1_a4kyt")
+icon_alignment = 1
+expand_icon = true
+
+[node name="UIManager" type="Node" parent="Control"]
+script = ExtResource("2_qmux8")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_left = 486.0
+offset_top = 29.0
+offset_right = 1128.0
+offset_bottom = 427.0
+
+[node name="LobbyList" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_llh4u")
+
+[node name="Node" type="Node" parent="Control"]
+script = ExtResource("4_0hgl0")
+
+[node name="CreateLobby3" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 996.0
+offset_top = 523.0
+offset_right = -52.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "create lobby"
+icon = ExtResource("1_a4kyt")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Control/CreateLobby" to="Control/UIManager" method="OnCreateLobbyButtonPressed"]
+[connection signal="pressed" from="Control/JoinLobby" to="Control/UIManager" method="OnJoinLobbyButtonPressed"]
+[connection signal="pressed" from="Control/CreateLobby3" to="Control/Node" method="_on_create_lobby_3_pressed"]

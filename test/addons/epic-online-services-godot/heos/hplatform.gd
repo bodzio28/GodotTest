@@ -20,12 +20,12 @@ signal log_msg(msg: EOS.Logging.LogMessage)
 ## Number of times to retry initializing the EOS SDK
 const INITIALIZE_RETRY_COUNT = 10
 ## Delay between retries initializing the EOS SDK in seconds
-const INITIALIZE_RETRY_DElAY_SEC = 0.2
+const INITIALIZE_RETRY_DELAY_SEC = 0.2
 
 ## Number of times to retry creating the EOS platform
 const CREATE_RETRY_COUNT = 10
 ## Delay between retries creating the EOS platform in seconds
-const CREATE_RETRY_DElAY_SEC = 0.2
+const CREATE_RETRY_DELAY_SEC = 0.2
 
 #endregion
 
@@ -42,11 +42,14 @@ var is_server: bool
 var override_country_code: String
 ## Override local code for the logged-in user
 var override_locale_code: String
-## Budget, measured in milliseconds, for EOS_Platform_Tick to do its work. Set it according to your desired FPS.
+## Budget in milliseconds for EOS_Platform_Tick.
+## Set according to your desired FPS.
 var tick_budget_in_milliseconds: int
-## Number of seconds for a task to wait for the network to become available before timing out with an EOS_TimedOut error
+## Number of seconds for a task to wait for network availability
+## before timing out with EOS_TimedOut error
 var task_network_timeout_seconds = null # float
-## Configures RTC behavior upon entering to any background application statuses See [enum EOS.Platform.RTCBackgroundMode]
+## Configures RTC behavior upon entering background app statuses.
+## See [enum EOS.Platform.RTCBackgroundMode]
 var rtc_options_background_mode = null
 
 #endregion
@@ -130,11 +133,13 @@ func initialize_async(opts: EOS.Platform.InitializeOptions) -> EOS.Result:
 	var retry_count = INITIALIZE_RETRY_COUNT
 	while not EOS.is_success(res) and retry_count > 0:
 		if not EOS.is_success(res) and retry_count > 0:
-			_log.debug("Failed to initialize EOS SDK: result_code=%s, retry_count=%s" % [EOS.result_str(res), INITIALIZE_RETRY_COUNT - retry_count + 1])
+			var retry_num = INITIALIZE_RETRY_COUNT - retry_count + 1
+			var msg = "Failed to initialize EOS SDK: result_code=%s, retry_count=%s"
+			_log.debug(msg % [EOS.result_str(res), retry_num])
 		
 		res = EOS.Platform.PlatformInterface.initialize(opts)
 		retry_count -= 1
-		await get_tree().create_timer(INITIALIZE_RETRY_DElAY_SEC).timeout
+		await get_tree().create_timer(INITIALIZE_RETRY_DELAY_SEC).timeout
 		
 	
 	if not (EOS.is_success(res) or res == EOS.Result.AlreadyConfigured):
@@ -149,7 +154,10 @@ func initialize_async(opts: EOS.Platform.InitializeOptions) -> EOS.Result:
 
 
 ## Set the logging level for the EOS SDK
-func set_eos_log_level(log_category: EOS.Logging.LogCategory, log_level: EOS.Logging.LogLevel) -> EOS.Result:
+func set_eos_log_level(
+	log_category: EOS.Logging.LogCategory,
+	log_level: EOS.Logging.LogLevel
+) -> EOS.Result:
 	var log_cat_str = EOS.Logging.LogCategory.find_key(log_category)
 	_log.verbose("Setting log level: log_category=%s, log_level=%s" % [log_cat_str, log_level])
 	var res := EOS.Logging.set_log_level(log_category, log_level)
@@ -162,17 +170,18 @@ func set_eos_log_level(log_category: EOS.Logging.LogCategory, log_level: EOS.Log
 ## Create the EOS Platform
 func create_platform_async(opts: EOS.Platform.CreateOptions) -> bool:
 	_log.debug("Creating EOS Platform")
-	_log.debug("EOS cache directory: %s" % opts.cache_directory)
 	var res := EOS.Platform.PlatformInterface.create(opts)
 	
 	var retry_count = CREATE_RETRY_COUNT
 	while not EOS.is_success(res) and retry_count > 0:
 		if not EOS.is_success(res) and retry_count > 0:
-			_log.debug("Failed to create EOS Platform: result_code=%s, retry_count=%s" % [EOS.result_str(res), CREATE_RETRY_COUNT - retry_count + 1])
+			var retry_num = CREATE_RETRY_COUNT - retry_count + 1
+			var msg = "Failed to create EOS Platform: result_code=%s, retry_count=%s"
+			_log.debug(msg % [EOS.result_str(res), retry_num])
 		
 		res = EOS.Platform.PlatformInterface.create(opts)
 		retry_count -= 1
-		await get_tree().create_timer(CREATE_RETRY_DElAY_SEC).timeout
+		await get_tree().create_timer(CREATE_RETRY_DELAY_SEC).timeout
 		
 	
 	if not EOS.is_success(res):

@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2yf84d4xmho2"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="1_3xm2k"]
+[ext_resource type="FontFile" uid="uid://c65l5c77oy1p5" path="res://Inter,Inter_Tight,Space_Mono/Space_Mono/SpaceMono-Bold.ttf" id="1_h2yge"]
+[ext_resource type="FontFile" uid="uid://fx12hnivyylk" path="res://Inter,Inter_Tight,Space_Mono/Space_Mono/SpaceMono-Regular.ttf" id="1_ig7tw"]
+[ext_resource type="StyleBox" uid="uid://drl2twqn1nt3b" path="res://button_border.tres" id="2_0xm2m"]
+[ext_resource type="StyleBox" uid="uid://c01fbiircsfdi" path="res://button_hover.tres" id="3_1bvp3"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3xm2k")
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[node name="MenuCenter" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VMenu" type="VBoxContainer" parent="Panel/MenuCenter"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MainMenu" type="Label" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("1_h2yge")
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="CreateGame" type="VBoxContainer" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+
+[node name="CreateGameButton" type="Button" parent="Panel/MenuCenter/VMenu/CreateGame"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_styles/normal = ExtResource("2_0xm2m")
+theme_override_styles/pressed = ExtResource("2_0xm2m")
+theme_override_styles/hover = ExtResource("3_1bvp3")
+text = "Stwórz grę"
+
+[node name="JoinGame" type="VBoxContainer" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+
+[node name="JoinGameButton" type="Button" parent="Panel/MenuCenter/VMenu/JoinGame"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_styles/normal = ExtResource("2_0xm2m")
+theme_override_styles/pressed = ExtResource("3_1bvp3")
+theme_override_styles/hover = ExtResource("3_1bvp3")
+text = "Dołącz do gry"
+
+[node name="Settings" type="VBoxContainer" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="Panel/MenuCenter/VMenu/Settings"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_styles/normal = ExtResource("2_0xm2m")
+theme_override_styles/pressed = ExtResource("3_1bvp3")
+theme_override_styles/hover = ExtResource("3_1bvp3")
+text = "Ustawienia"
+
+[node name="Help" type="VBoxContainer" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+
+[node name="HelpButton" type="Button" parent="Panel/MenuCenter/VMenu/Help"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_styles/normal = ExtResource("2_0xm2m")
+theme_override_styles/pressed = ExtResource("3_1bvp3")
+theme_override_styles/hover = ExtResource("3_1bvp3")
+text = "Pomoc"
+
+[node name="Quit" type="VBoxContainer" parent="Panel/MenuCenter/VMenu"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="Panel/MenuCenter/VMenu/Quit"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_styles/normal = ExtResource("2_0xm2m")
+theme_override_styles/pressed = ExtResource("3_1bvp3")
+theme_override_styles/hover = ExtResource("3_1bvp3")
+text = "Wyjdź z gry"
+
+[node name="CornerAnchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="CornerAnchor"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 142.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("1_h2yge")
+theme_override_font_sizes/font_size = 24
+text = "Wzimniacy"
