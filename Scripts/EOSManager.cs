@@ -51,10 +51,10 @@ public partial class EOSManager : Node
 	// ID użytkownika - dla P2P używamy ProductUserId (Connect), dla Epic Account używamy EpicAccountId (Auth)
 	private ProductUserId localProductUserId;  // P2P/Connect ID
 	public string localProductUserIdString
-    {
-        get { return localProductUserId.ToString(); }
+	{
+		get { return localProductUserId.ToString(); }
 		set { localProductUserId = ProductUserId.FromString(value); }
-    }  // P2P/Connect ID
+	}  // P2P/Connect ID
 	private EpicAccountId localEpicAccountId;  // Epic Account ID
 
 	// Przechowywanie znalezionych lobby
@@ -79,11 +79,11 @@ public partial class EOSManager : Node
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-    {
+	{
 		GD.Print("=== Starting EOS Initialization ===");
 		
 		// Krok 1: Inicjalizacja SDK
-        var initializeOptions = new InitializeOptions()
+		var initializeOptions = new InitializeOptions()
 		{
 			ProductName = productName,
 			ProductVersion = productVersion,
@@ -93,10 +93,10 @@ public partial class EOSManager : Node
 		
 		var initializeResult = PlatformInterface.Initialize(ref initializeOptions);
 		if (initializeResult != Result.Success)
-        {
-            GD.PrintErr("Failed to initialize EOS SDK: " + initializeResult);
+		{
+			GD.PrintErr("Failed to initialize EOS SDK: " + initializeResult);
 			return;
-        }
+		}
 
 		GD.Print("✅ EOS SDK initialized successfully.");
 
@@ -163,7 +163,7 @@ public partial class EOSManager : Node
 
 		// Krok 4: Logowanie P2P (anonimowe, bez konta Epic)
 		LoginWithDeviceId_P2P();
-    }
+	}
 	
 	private void CreateLobbyRefreshTimer()
 	{
@@ -1453,9 +1453,3 @@ private void OnLobbyMemberUpdateReceived(ref LobbyMemberUpdateReceivedCallbackIn
 		}
 	}
 }
-
-
-
-
-
-

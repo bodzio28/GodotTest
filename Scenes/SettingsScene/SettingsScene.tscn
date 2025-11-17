@@ -1,0 +1,117 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfxpcutxox0tt"]
+
+[ext_resource type="Script" uid="uid://b3hj5xs3vpgs4" path="res://Scenes/SettingsScene/SettingsScene.gd" id="1_gaid6"]
+[ext_resource type="FontFile" uid="uid://c65l5c77oy1p5" path="res://Assets/Fonts/Space_Mono/SpaceMono-Bold.ttf" id="2_fa6u7"]
+
+[node name="SettingsScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gaid6")
+
+[node name="SettingsPanel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[node name="SettingsCenter" type="CenterContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSettings" type="VBoxContainer" parent="SettingsPanel/SettingsCenter"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="SettingsPanel/SettingsCenter/VSettings"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_fa6u7")
+theme_override_font_sizes/font_size = 20
+text = "Ustawienia"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="SettingsPanel/SettingsCenter/VSettings"]
+layout_mode = 2
+current_tab = 0
+
+[node name="Dźwięk" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Master" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+text = "Głośność Ogólna"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+text = "Głośność Muzyki"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+text = "Głóśność Efektów"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+
+[node name="MuteCheckBox" type="CheckButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+layout_mode = 2
+text = "Wycisz Wszystko"
+
+[node name="Wideo" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+layout_mode = 2
+
+[node name="ScreenOption" type="OptionButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "W Oknie"
+popup/item_0/id = 0
+popup/item_1/text = "Pełny Ekran"
+popup/item_1/id = 1
+
+[node name="VsyncCheckBox" type="CheckBox" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+layout_mode = 2
+text = "V-Sync"
+
+[node name="ReturnButton" type="Button" parent="SettingsPanel/SettingsCenter/VSettings"]
+layout_mode = 2
+text = "Wróć do Main Menu"
+
+[node name="CornerAnchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="CornerAnchor"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 142.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_fa6u7")
+theme_override_font_sizes/font_size = 24
+text = "Wzimniacy"

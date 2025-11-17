@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckp3exuwmqk6i"]
+
+[ext_resource type="FontFile" uid="uid://c65l5c77oy1p5" path="res://Assets/Fonts/Space_Mono/SpaceMono-Bold.ttf" id="2_joa0n"]
+[ext_resource type="Script" uid="uid://do7melntu2xr" path="res://Scenes/HelpScene/HelpScene.gd" id="2_vxrbp"]
+
+[node name="HelpScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_vxrbp")
+
+[node name="HelpPanel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[node name="HelpCenter" type="CenterContainer" parent="HelpPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VHelp" type="VBoxContainer" parent="HelpPanel/HelpCenter"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HelpLabel" type="Label" parent="HelpPanel/HelpCenter/VHelp"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_joa0n")
+theme_override_font_sizes/font_size = 20
+text = "Zasady gry"
+horizontal_alignment = 1
+
+[node name="RulesPanel" type="Panel" parent="HelpPanel/HelpCenter/VHelp"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+
+[node name="GameRules" type="RichTextLabel" parent="HelpPanel/HelpCenter/VHelp/RulesPanel"]
+clip_contents = false
+layout_mode = 0
+offset_right = 287.0
+offset_bottom = 162.0
+text = "1. Znajdź lobby lub stwórz własne.
+2. Zaproś znajomych używając kodu pokoju.
+3. Rozpocznij grę, gdy wszyscy będą gotowi.
+4. ..."
+
+[node name="ReturnButton" type="Button" parent="HelpPanel/HelpCenter/VHelp"]
+layout_mode = 2
+text = "Wróć do Main Menu"
+
+[node name="CornerAnchor" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="CornerAnchor"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 142.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_joa0n")
+theme_override_font_sizes/font_size = 24
+text = "Wzimniacy"

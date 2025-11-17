@@ -116,11 +116,3 @@ theme_override_colors/font_color = Color(0, 1, 0.8, 1)
 theme_override_fonts/font = ExtResource("1_h2yge")
 theme_override_font_sizes/font_size = 24
 text = "Wzimniacy"
-
-[node name="QuitGameConfarmation" type="ConfirmationDialog" parent="."]
-oversampling_override = 1.0
-initial_position = 2
-size = Vector2i(261, 100)
-ok_button_text = "TAK"
-dialog_text = "Czy na pewno chcesz opuśić grę"
-cancel_button_text = "NIE"
