@@ -5,7 +5,7 @@ const AUDIO_HOVER = preload("res://Sounds/Hover.ogg")
 const AUDIO_BUTTON = preload("res://Sounds/Button.ogg")
 const AUDIO_BG_MUSIC = preload("res://Sounds/BackGround.mp3")
 
-# --- ZMIENNE NA ODTWARZACZE ---
+# ZMIENNE NA ODTWARZACZE
 var music_player: AudioStreamPlayer
 var sfx_hover: AudioStreamPlayer
 var sfx_click: AudioStreamPlayer
@@ -17,12 +17,10 @@ func _ready() -> void:
 	# 2. Start muzyki
 	play_music()
 	
-	# 3. MAGIA: Podłączamy się do sygnału drzewa scen.
-	# Kiedykolwiek jakikolwiek węzeł (Node) zostanie dodany do gry (w dowolnej scenie),
-	# sprawdzimy, czy jest przyciskiem.
+	# 3. Podłączamy się do sygnału drzewa scen.
 	get_tree().node_added.connect(_on_node_added)
 
-# --- KONFIGURACJA ---
+# KONFIGURACJA
 func _setup_audio_players() -> void:
 	# Muzyka
 	music_player = AudioStreamPlayer.new()
@@ -32,26 +30,26 @@ func _setup_audio_players() -> void:
 	music_player.bus = "Music"
 	add_child(music_player)
 	
-	# Kliknięcie
+	#CLICK
 	sfx_click = AudioStreamPlayer.new()
 	sfx_click.stream = AUDIO_BUTTON
 	sfx_click.volume_db = -5.0
 	sfx_click.bus = "SFX"
 	add_child(sfx_click)
 	
-	# Hover
+	# HOVER
 	sfx_hover = AudioStreamPlayer.new()
 	sfx_hover.stream = AUDIO_HOVER
 	sfx_hover.volume_db = -10.0
 	sfx_hover.bus = "SFX"
 	add_child(sfx_hover)
 
-# --- START MUZYKI ---
+# START MUZYKI
 func play_music() -> void:
 	if not music_player.playing:
 		music_player.play()
 
-# --- AUTOMATYCZNE WYKRYWANIE PRZYCISKÓW ---
+# AUTOMATYCZNE WYKRYWANIE PRZYCISKÓW
 func _on_node_added(node: Node) -> void:
 	# Jeśli dodany element to Przycisk (Button) LUB TextureButton...
 	if node is Button or node is TextureButton:
@@ -61,7 +59,7 @@ func _on_node_added(node: Node) -> void:
 			node.mouse_entered.connect(_play_hover)
 			node.pressed.connect(_play_click)
 
-# --- ODTWARZANIE EFEKTÓW ---
+# ODTWARZANIE EFEKTÓW
 func _play_hover() -> void:
 	# Opcjonalny Randomizer, żeby nie brzmiało jak robot
 	sfx_hover.pitch_scale = randf_range(0.95, 1.05)

@@ -1,12 +1,9 @@
 extends Control
 
-# --- 1. KONFIGURACJA ŚCIEŻEK ---
 const SAVE_PATH = "user://settings.cfg"
-# Upewnij się, że ta ścieżka do menu jest poprawna!
+
 const MAIN_MENU_SCENE_PATH = "res://Scenes/MainMenu/main.tscn"
 
-# --- 2. PRZYPISANIE ELEMENTÓW INTERFEJSU (NODÓW) ---
-# WAŻNE: Sprawdź, czy nazwy po prawej zgadzają się z Twoim drzewem w edytorze!
 @onready var master_slider = $SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk/MasterSlider
 @onready var music_slider = $SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk/MusicSlider
 @onready var sfx_slider = $SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk/SFXSlider
@@ -15,7 +12,7 @@ const MAIN_MENU_SCENE_PATH = "res://Scenes/MainMenu/main.tscn"
 @onready var save_button = $SettingsPanel/SettingsCenter/VSettings/SaveButton
 @onready var return_button = $SettingsPanel/SettingsCenter/VSettings/ReturnButton
 
-# --- 3. DANE (Domyślne ustawienia) ---
+# Domyślne ustawienia
 var config_data = {
 	"sound": {
 		"master_volume": 1.0,
@@ -29,12 +26,11 @@ var config_data = {
 	}
 }
 
-# --- 4. START SCENY ---
+# START SCENY
 func _ready():
-	# Najpierw pobieramy ustawienia z pliku
 	load_settings()
 	
-	# Aktualizujemy wygląd suwaków, żeby pasowały do wczytanych danych
+	# Aktualizacja wyglądu suwaków, żeby pasowały do wczytanych danych
 	update_ui_elements()
 	
 	# Podłączamy sygnały (reakcje na kliknięcia)
@@ -50,14 +46,14 @@ func _ready():
 	save_button.pressed.connect(save_settings)
 	return_button.pressed.connect(_on_back_button_pressed)
 
-# --- 5. LOGIKA DANYCH (Zapis/Odczyt) ---
+# LOGIKA DANYCH (Zapis/Odczyt)
 func load_settings():
 	var config = ConfigFile.new()
 	var err = config.load(SAVE_PATH)
 
 	if err != OK:
 		print("Brak pliku ustawień. Używam domyślnych.")
-		apply_audio_settings() # Aplikujemy domyślne
+		apply_audio_settings()
 		return
 
 	# Pobieramy dane (jeśli czegoś brakuje, wstawiamy wartość domyślną)
@@ -89,7 +85,7 @@ func save_settings():
 	config.save(SAVE_PATH)
 	print("Ustawienia zostały zapisane w: ", SAVE_PATH)
 
-# --- 6. AKTUALIZACJA UI ---
+# AKTUALIZACJA UI
 func update_ui_elements():
 	# Ustawiamy suwaki w dobrych miejscach
 	master_slider.value = config_data.sound.master_volume
@@ -99,7 +95,7 @@ func update_ui_elements():
 	if mute_box:
 		mute_box.button_pressed = config_data.sound.is_muted
 
-# --- 7. REAKCJA NA SUWAKI (Live Update) ---
+# REAKCJA NA SLIDERY (Live Update)
 func _on_master_slider_changed(value: float):
 	config_data.sound.master_volume = value
 	_set_bus_volume("Master", value)
@@ -117,7 +113,7 @@ func _on_mute_toggled(is_muted: bool):
 	var master_idx = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_mute(master_idx, is_muted)
 
-# --- 8. FUNKCJE POMOCNICZE (SYSTEMOWE) ---
+# FUNKCJE POMOCNICZE (SYSTEMOWE) 
 func apply_audio_settings():
 	_set_bus_volume("Master", config_data.sound.master_volume)
 	_set_bus_volume("Music", config_data.sound.music_volume)
@@ -133,21 +129,19 @@ func _set_bus_volume(bus_name: String, linear_val: float):
 	AudioServer.set_bus_volume_db(bus_idx, db_val)
 
 func apply_video_settings():
-	# V-Sync
+	
 	if config_data.video.vsync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		
-	# Tryb okna
 	match config_data.video.display_mode:
 		0: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		1: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 		2: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-# --- 9. NAWIGACJA ---
+# POWRÓT DO MENU
 func _on_back_button_pressed():
-	# Sprawdź czy plik sceny MainMenu faktycznie istnieje pod tą ścieżką!
 	if ResourceLoader.exists(MAIN_MENU_SCENE_PATH):
 		get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
 	else:
