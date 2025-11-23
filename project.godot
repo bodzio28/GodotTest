@@ -27,6 +27,7 @@ HStats="*res://addons/epic-online-services-godot/heos/hstats.gd"
 HLeaderboards="*res://addons/epic-online-services-godot/heos/hleaderboards.gd"
 HLobbies="*res://addons/epic-online-services-godot/heos/hlobbies.gd"
 HP2P="*res://addons/epic-online-services-godot/heos/hp2p.gd"
+SoundScript="*res://Sounds/SoundScript.gd"
 
 [dotnet]
 

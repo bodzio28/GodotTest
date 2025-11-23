@@ -44,9 +44,10 @@ horizontal_alignment = 1
 
 [node name="TabContainer" type="TabContainer" parent="SettingsPanel/SettingsCenter/VSettings"]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Dźwięk" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -56,6 +57,8 @@ text = "Głośność Ogólna"
 
 [node name="MasterSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
 
 [node name="Music" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
@@ -63,6 +66,8 @@ text = "Głośność Muzyki"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
 
 [node name="SFX" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
@@ -70,13 +75,14 @@ text = "Głóśność Efektów"
 
 [node name="SFXSlider" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
 
 [node name="MuteCheckBox" type="CheckButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
 text = "Wycisz Wszystko"
 
 [node name="Wideo" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -94,6 +100,10 @@ popup/item_1/id = 1
 [node name="VsyncCheckBox" type="CheckBox" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
 layout_mode = 2
 text = "V-Sync"
+
+[node name="SaveButton" type="Button" parent="SettingsPanel/SettingsCenter/VSettings"]
+layout_mode = 2
+text = "Zapisz Zmiany"
 
 [node name="ReturnButton" type="Button" parent="SettingsPanel/SettingsCenter/VSettings"]
 layout_mode = 2
