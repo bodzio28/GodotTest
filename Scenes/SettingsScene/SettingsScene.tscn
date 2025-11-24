@@ -44,14 +44,13 @@ horizontal_alignment = 1
 
 [node name="TabContainer" type="TabContainer" parent="SettingsPanel/SettingsCenter/VSettings"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Dźwięk" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Master" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+[node name="LMaster" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
 text = "Głośność Ogólna"
 
@@ -60,7 +59,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.01
 
-[node name="Music" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+[node name="LMusic" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
 text = "Głośność Muzyki"
 
@@ -69,7 +68,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.01
 
-[node name="SFX" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
+[node name="LSFX" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Dźwięk"]
 layout_mode = 2
 text = "Głóśność Efektów"
 
@@ -82,24 +81,48 @@ step = 0.01
 layout_mode = 2
 text = "Wycisz Wszystko"
 
-[node name="Wideo" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
+[node name="Video" type="VBoxContainer" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+[node name="LScreenOption" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
 layout_mode = 2
+text = "Tryb okna"
 
-[node name="ScreenOption" type="OptionButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+[node name="ScreenOption" type="OptionButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
 layout_mode = 2
+selected = 0
 item_count = 2
 popup/item_0/text = "W Oknie"
 popup/item_0/id = 0
 popup/item_1/text = "Pełny Ekran"
 popup/item_1/id = 1
 
-[node name="VsyncCheckBox" type="CheckBox" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Wideo"]
+[node name="LResolution" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
 layout_mode = 2
-text = "V-Sync"
+text = " Tryb Rozdzielczości"
+
+[node name="ResolutionOption" type="OptionButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1366x786"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
+
+[node name="LScaleUI" type="Label" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
+layout_mode = 2
+text = "Skala UI"
+
+[node name="SliderUI" type="HSlider" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
 
 [node name="SaveButton" type="Button" parent="SettingsPanel/SettingsCenter/VSettings"]
 layout_mode = 2
