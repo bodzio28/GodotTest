@@ -92,7 +92,6 @@ text = "Tryb okna"
 
 [node name="ScreenOption" type="OptionButton" parent="SettingsPanel/SettingsCenter/VSettings/TabContainer/Video"]
 layout_mode = 2
-selected = 0
 item_count = 2
 popup/item_0/text = "W Oknie"
 popup/item_0/id = 0
